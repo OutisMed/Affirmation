@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.affirmation.data.Datasource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,23 +88,6 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
 
 
 
-@Composable
-fun AffirmationsApp() {
-    val layoutDirection = LocalLayoutDirection.current
-    Surface(
-        Modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .padding(
-                start = WindowInsets.safeDrawing.asPaddingValues()
-                    .calculateStartPadding(layoutDirection),
-                end = WindowInsets.safeDrawing.asPaddingValues()
-                    .calculateEndPadding(layoutDirection),
-            ),
-    ) {
-    }
-}
-
 
 @Composable
 fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Modifier) {
@@ -118,8 +102,30 @@ fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Mod
 }
 
 
+@Composable
+fun AffirmationsApp() {
+    val layoutDirection = LocalLayoutDirection.current
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+            .padding(
+                start = WindowInsets.safeDrawing.asPaddingValues()
+                    .calculateStartPadding(layoutDirection),
+                end = WindowInsets.safeDrawing.asPaddingValues()
+                    .calculateEndPadding(layoutDirection),
+            ),
+    ) {
+        AffirmationsList(
+            affirmationList = Datasource().loadAffirmations(),
+        )
+    }
+}
 
+@Composable
+fun AffirmationsList(affirmationList: List<Affirmation>) {
 
+}
 
 
 @Preview
