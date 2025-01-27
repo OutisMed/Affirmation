@@ -17,6 +17,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.layout.ContentScale
@@ -75,6 +77,26 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
     }
 }
 
+
+
+
+@Composable
+fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
+        items(affirmationList) { affirmation ->
+            AffirmationCard(
+                affirmation = affirmation,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
+}
+
+
+
+
+
+
 @Preview
 @Composable
 private fun AffirmationCardPreview() {
@@ -85,6 +107,6 @@ private fun AffirmationCardPreview() {
 @Composable
 fun GreetingPreview() {
     AffirmationTheme {
-        Greeting("Android")
+        AffirmationCardPreview()
     }
 }
